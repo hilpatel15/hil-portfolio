@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hil Patel — AI Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy2: #0d1f3c;
+    --navy3: #112244;
+    --red: #cc0000;
+    --red2: #e60000;
+    --red-light: #ff2222;
+    --white: #ffffff;
+    --off-white: #f0f4ff;
+    --gray: #8899bb;
+    --border: rgba(204,0,0,0.3);
+    --gold: #ffd700;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ANIMATED BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 40% at 20% 10%, rgba(204,0,0,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(10,22,40,0.9) 0%, transparent 70%),
+      repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(204,0,0,0.03) 60px, rgba(204,0,0,0.03) 61px),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(0,40,100,0.05) 60px, rgba(0,40,100,0.05) 61px);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* WEB PATTERN */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, transparent 30%, rgba(204,0,0,0.04) 31%, transparent 32%),
+                radial-gradient(circle, transparent 50%, rgba(204,0,0,0.03) 51%, transparent 52%),
+                radial-gradient(circle, transparent 70%, rgba(204,0,0,0.02) 71%, transparent 72%),
+                radial-gradient(circle, transparent 90%, rgba(204,0,0,0.015) 91%, transparent 92%);
+    z-index: 0;
+    pointer-events: none;
+    animation: pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:0.5;transform:scale(1)} 50%{opacity:1;transform:scale(1.05)} }
+
+  section, nav, header, footer { position: relative; z-index: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4rem;
+    height: 64px;
+    background: rgba(10,22,40,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 4px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red2); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--red2); }
+
+  /* HERO */
+  header {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 260px;
+    color: rgba(204,0,0,0.06);
+    letter-spacing: 10px;
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .hero-content { max-width: 780px; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(204,0,0,0.1);
+    border: 1px solid rgba(204,0,0,0.4);
+    padding: 6px 16px;
+    border-radius: 2px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--red-light);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: var(--red2);
+    border-radius: 50%;
+    animation: blink 1.5s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 10vw, 130px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  h1 .last { color: var(--red2); display: block; }
+
+  .hero-title-line {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin: 1.5rem 0;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-title-line::before, .hero-title-line::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, var(--red2), transparent);
+  }
+  .hero-title-line::before { flex: 0 0 60px; background: var(--red2); }
+  .hero-role {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--off-white);
+  }
+
+  .hero-desc {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--gray);
+    max-width: 580px;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .btn {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+  }
+  .btn-primary {
+    background: var(--red2);
+    color: var(--white);
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.3);
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-outline:hover { border-color: var(--red2); color: var(--red2); transform: translateY(-2px); }
+
+  .hero-stats {
+    position: absolute; right: 4rem; bottom: 4rem;
+    display: flex; flex-direction: column; gap: 2rem;
+    animation: fadeLeft 0.8s 0.5s ease both;
+  }
+  .stat {
+    text-align: right;
+    border-right: 2px solid var(--red2);
+    padding-right: 1.5rem;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    line-height: 1;
+    color: var(--white);
+  }
+  .stat-num span { color: var(--red2); }
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeLeft { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; }
+
+  .section-header {
+    display: flex; align-items: center; gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  .section-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    line-height: 1;
+    color: rgba(204,0,0,0.15);
+    letter-spacing: 2px;
+  }
+  .section-title-group h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 4px;
+    line-height: 1;
+  }
+  .section-title-group p {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--red2);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* SKILLS */
+  #skills { background: rgba(13,31,60,0.5); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1.5px solid var(--border);
+  }
+
+  .skill-card {
+    background: var(--navy2);
+    padding: 2rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--red2);
+    transition: height 0.3s;
+  }
+  .skill-card:hover { background: var(--navy3); }
+  .skill-card:hover::before { height: 100%; }
+
+  .skill-icon {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--red2);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .skill-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+  }
+  .skill-tags {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 1rem;
+  }
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    background: rgba(204,0,0,0.1);
+    border: 1px solid rgba(204,0,0,0.25);
+    color: var(--gray);
+    border-radius: 1px;
+  }
+
+  /* EXPERIENCE */
+  .exp-timeline { position: relative; }
+  .exp-timeline::before {
+    content: '';
+    position: absolute;
+    left: 180px; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--red2), rgba(204,0,0,0.1));
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 0 3rem;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 180px; top: 8px;
+    width: 12px; height: 12px;
+    background: var(--red2);
+    border: 2px solid var(--navy);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .exp-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    padding-top: 6px;
+    text-align: right;
+    padding-right: 3rem;
+  }
+  .exp-body {
+    padding-left: 2rem;
+  }
+  .exp-role {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 2px;
+    color: var(--white);
+    line-height: 1;
+  }
+  .exp-company {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--red2);
+    text-transform: uppercase;
+    margin: 4px 0 12px;
+  }
+  .exp-desc {
+    color: var(--gray);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .exp-desc li { margin-bottom: 6px; list-style: none; padding-left: 16px; position: relative; }
+  .exp-desc li::before { content: '//'; position: absolute; left: 0; color: var(--red2); font-family: 'Space Mono', monospace; font-size: 10px; top: 2px; }
+
+  /* PROJECTS */
+  #projects { background: rgba(13,31,60,0.4); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  }
+  .project-card:hover { transform: translateY(-4px); border-color: var(--red2); }
+  .project-card::after {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    border-style: solid;
+    border-width: 0 16px 16px 0;
+    border-color: transparent var(--red2) transparent transparent;
+  }
+
+  .project-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 60px;
+    color: rgba(204,0,0,0.08);
+    line-height: 1;
+    position: absolute;
+    bottom: 1rem; right: 1.5rem;
+  }
+  .project-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--red2);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .project-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 0.75rem;
+  }
+  .project-card p {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .project-tech {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+
+  /* FEATURED - wider card */
+  .project-card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    background: linear-gradient(135deg, var(--navy2) 0%, var(--navy3) 100%);
+    border-color: var(--red2);
+  }
+  .featured-badge {
+    position: absolute; top: 1.5rem; left: 1.5rem;
+    background: var(--red2);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    padding: 4px 10px;
+    text-transform: uppercase;
+  }
+
+  /* CONTACT */
+  #contact { text-align: center; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 3rem 0;
+  }
+  .contact-item {
+    background: var(--navy2);
+    padding: 2rem;
+    text-decoration: none;
+    color: var(--white);
+    transition: background 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .contact-item:hover { background: var(--navy3); }
+  .contact-icon {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--red2);
+    letter-spacing: 2px;
+  }
+  .contact-type {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+  .contact-val {
+    font-size: 15px;
+    color: var(--off-white);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: rgba(10,22,40,0.95);
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gray);
+  }
+  footer span { color: var(--red2); }
+
+  /* SCROLL ANIMATION */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">HIL<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header>
+  <div class="hero-bg-text">ENGINEER</div>
+  <div class="hero-content">
+    <div class="hero-badge">Available for opportunities</div>
+    <h1>HIL<span class="last">PATEL</span></h1>
+    <div class="hero-title-line">
+      <span class="hero-role">AI Engineer &amp; Builder</span>
+    </div>
+    <p class="hero-desc">
+      Building scalable AI agents, voice bots, and intelligent automation systems that solve real-world business problems. Currently engineering production-grade AI solutions at TechnoSmart, Vadodara.
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:hilpatel1502@gmail.com" class="btn btn-primary">Get In Touch</a>
+      <a href="https://github.com/IamHil" class="btn btn-outline" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/hil-patel-b1b10b228/" class="btn btn-outline" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">3<span>+</span></div>
+      <div class="stat-label">Years Building</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5<span>+</span></div>
+      <div class="stat-label">AI Projects</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1<span>x</span></div>
+      <div class="stat-label">Published Paper</div>
+    </div>
+  </div>
+</header>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-num">01</div>
+    <div class="section-title-group">
+      <h2>Tech Stack</h2>
+      <p>// What I build with</p>
+    </div>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="skill-card">
+      <span class="skill-icon">AI</span>
+      <h3>Generative AI</h3>
+      <p style="color:var(--gray);font-size:14px;line-height:1.6">Building LLM-powered agents, voice bots, and RAG pipelines for production workflows.</p>
+      <div class="skill-tags">
+        <span class="tag">OpenAI APIs</span>
+        <span class="tag">AWS Bedrock</span>
+        <span class="tag">Hugging Face</span>
+        <span class="tag">RAG</span>
+        <span class="tag">LLM Fine-tuning</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">ML</span>
+      <h3>Machine Learning</h3>
+      <p style="color:var(--gray);font-size:14px;line-height:1.6">Deep reinforcement learning, transformer architectures, and model optimization.</p>
+      <div class="skill-tags">
+        <span class="tag">PyTorch</span>
+        <span class="tag">TensorFlow</span>
+        <span class="tag">scikit-learn</span>
+        <span class="tag">DQN / A3C</span>
+        <span class="tag">Transformers</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">DEV</span>
+      <h3>Backend & APIs</h3>
+      <p style="color:var(--gray);font-size:14px;line-height:1.6">Scalable server architectures and REST APIs powering AI agent platforms.</p>
+      <div class="skill-tags">
+        <span class="tag">Node.js</span>
+        <span class="tag">Python</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">.NET</span>
+        <span class="tag">SQL</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">AWS</span>
+      <h3>Cloud Infrastructure</h3>
+      <p style="color:var(--gray);font-size:14px;line-height:1.6">Production deployments on AWS with containerization and serverless services.</p>
+      <div class="skill-tags">
+        <span class="tag">EC2</span>
+        <span class="tag">ECS</span>
+        <span class="tag">DynamoDB</span>
+        <span class="tag">Cognito</span>
+        <span class="tag">DocumentDB</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">UI</span>
+      <h3>Frontend</h3>
+      <p style="color:var(--gray);font-size:14px;line-height:1.6">Agent management dashboards and monitoring interfaces.</p>
+      <div class="skill-tags">
+        <span class="tag">Next.js</span>
+        <span class="tag">React</span>
+        <span class="tag">HTML/CSS</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">RPA</span>
+      <h3>Automation</h3>
+      <p style="color:var(--gray);font-size:14px;line-height:1.6">Robotic process automation for cybersecurity and finance workflows.</p>
+      <div class="skill-tags">
+        <span class="tag">Python RPA</span>
+        <span class="tag">Autobots</span>
+        <span class="tag">Workflow Design</span>
+        <span class="tag">SQL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <div class="section-num">02</div>
+    <div class="section-title-group">
+      <h2>Experience</h2>
+      <p>// Where I've built things</p>
+    </div>
+  </div>
+  <div class="exp-timeline">
+    <div class="exp-item reveal">
+      <div class="exp-date">Feb 2025<br>— Present</div>
+      <div class="exp-body">
+        <div class="exp-role">AI Engineer</div>
+        <div class="exp-company">TechnoSmart (Virtual Teams &amp; Solution)</div>
+        <ul class="exp-desc">
+          <li>Designing scalable AI agents, voice agents, and SMS/WhatsApp messaging agents for healthcare, customer support, and enterprise automation</li>
+          <li>Built a generic AI agent platform with Node.js backend and Next.js frontend for rapid creation and deployment</li>
+          <li>Deployed production infrastructure on AWS EC2, ECS, DynamoDB, Bedrock, Cognito, and DocumentDB</li>
+          <li>Integrated Salesforce, Microsoft services, and Google APIs into AI-driven workflows</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">Sept 2024<br>— Feb 2025</div>
+      <div class="exp-body">
+        <div class="exp-role">RPA Engineer Intern</div>
+        <div class="exp-company">Harptec Software Pvt. Ltd</div>
+        <ul class="exp-desc">
+          <li>Designed and implemented RPA solutions using Python and SQL for automated task execution</li>
+          <li>Built cybersecurity and finance autobots to enhance operational efficiency</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">Dec 2023<br>— Apr 2024</div>
+      <div class="exp-body">
+        <div class="exp-role">.NET Developer Intern</div>
+        <div class="exp-company">Digikentro</div>
+        <ul class="exp-desc">
+          <li>Built and optimized CRUD operations for web applications using SQL databases</li>
+          <li>Designed a Licensed Management System for software license tracking</li>
+          <li>Worked with Blazor for interactive web application development</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <div class="section-num">03</div>
+    <div class="section-title-group">
+      <h2>Projects</h2>
+      <p>// Things I've built</p>
+    </div>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card featured reveal">
+      <div class="featured-badge">PROD</div>
+      <div>
+        <div class="project-label">Production Platform</div>
+        <h3>Generic AI Agent Platform</h3>
+        <p>A reusable, production-grade AI agent platform enabling fast creation and management of voice, chat, and automation agents at scale. Powers real-world enterprise workflows at TechnoSmart with standardized lifecycle management and monitoring.</p>
+        <div class="project-tech">
+          <span class="tag">Node.js</span>
+          <span class="tag">Next.js</span>
+          <span class="tag">AWS ECS</span>
+          <span class="tag">DynamoDB</span>
+          <span class="tag">AWS Bedrock</span>
+          <span class="tag">Salesforce</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div style="background:rgba(204,0,0,0.08);border:1px solid rgba(204,0,0,0.2);padding:1.5rem;">
+          <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gray);margin-bottom:0.5rem">IMPACT</div>
+          <p style="font-size:14px;color:var(--off-white);line-height:1.6">Standardized AI agent creation reducing development time across healthcare, customer support, and enterprise automation verticals.</p>
+        </div>
+      </div>
+      <div class="project-num">01</div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-label">Reinforcement Learning</div>
+      <h3>DQN Atari Agent</h3>
+      <p>Deep Q-Network agent trained to play Atari's Assault using Gymnasium and PyTorch. Custom neural network architectures with preprocessing pipelines and hyperparameter optimization.</p>
+      <div class="project-tech">
+        <span class="tag">PyTorch</span>
+        <span class="tag">DQN</span>
+        <span class="tag">Gymnasium</span>
+        <span class="tag">Python</span>
+      </div>
+      <div class="project-num">02</div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-label">Reinforcement Learning</div>
+      <h3>A3C Game AI</h3>
+      <p>Asynchronous Advantage Actor-Critic model for game optimization leveraging parallel processing to dramatically reduce training time versus standard approaches.</p>
+      <div class="project-tech">
+        <span class="tag">TensorFlow</span>
+        <span class="tag">A3C</span>
+        <span class="tag">Gymnasium</span>
+        <span class="tag">Python</span>
+      </div>
+      <div class="project-num">03</div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-label">NLP / LLM</div>
+      <h3>LLM Fine-tuning</h3>
+      <p>Fine-tuned a pre-trained Transformer model using Hugging Face with gradient accumulation and learning rate schedulers. Achieved 15% BLEU score improvement on text summarization.</p>
+      <div class="project-tech">
+        <span class="tag">Hugging Face</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">Transformers</span>
+        <span class="tag">BLEU</span>
+      </div>
+      <div class="project-num">04</div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-label">Healthcare AI · Published</div>
+      <h3>MedAssist</h3>
+      <p>Health analyzer and prescription suggestion system published as a research paper. Demonstrates applied AI for real-world medical decision support use cases.</p>
+      <div class="project-tech">
+        <span class="tag">Python</span>
+        <span class="tag">AI/ML</span>
+        <span class="tag">Research</span>
+      </div>
+      <div class="project-num">05</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal" style="justify-content:center">
+    <div class="section-num">04</div>
+    <div class="section-title-group">
+      <h2>Contact</h2>
+      <p>// Let's build something</p>
+    </div>
+  </div>
+  <p class="reveal" style="color:var(--gray);font-size:18px;max-width:500px;margin:0 auto;line-height:1.7">
+    Open to AI engineering roles, collaborations, and interesting projects. Based in Vadodara, Gujarat — happy to work remotely.
+  </p>
+  <div class="contact-grid reveal">
+    <a href="mailto:hilpatel1502@gmail.com" class="contact-item">
+      <span class="contact-icon">MAIL</span>
+      <span class="contact-type">Email</span>
+      <span class="contact-val">hilpatel1502@gmail.com</span>
+    </a>
+    <a href="tel:+919313635965" class="contact-item">
+      <span class="contact-icon">CALL</span>
+      <span class="contact-type">Phone</span>
+      <span class="contact-val">+91 9313 635 965</span>
+    </a>
+    <a href="https://linkedin.com/in/hil-patel-b1b10b228/" target="_blank" class="contact-item">
+      <span class="contact-icon">LI</span>
+      <span class="contact-type">LinkedIn</span>
+      <span class="contact-val">hil-patel</span>
+    </a>
+    <a href="https://github.com/IamHil" target="_blank" class="contact-item">
+      <span class="contact-icon">GH</span>
+      <span class="contact-type">GitHub</span>
+      <span class="contact-val">IamHil</span>
+    </a>
+    <a href="https://kaggle.com/hilpatel" target="_blank" class="contact-item">
+      <span class="contact-icon">KG</span>
+      <span class="contact-type">Kaggle</span>
+      <span class="contact-val">hilpatel</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>HIL <span>PATEL</span> — AI ENGINEER</p>
+  <p>Built with <span>♥</span> in Vadodara, Gujarat</p>
+  <p><span>©</span> 2025</p>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
